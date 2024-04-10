@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <section>
+        <h3>Functions Tab</h3>
+        <h5>Select Input type: </h5>
+        <input type="radio" name="transition_type" id="manual">Manual
+        <input type="radio" name="transition_type" id="automatic" onclick="changeImg()">Automatic
+        <br>
+        <input type="number" name="time" id="delaytime" placeholder="Enter time in miliseconds">
+        <button onclick="time=document.getElementById('delaytime').value">Set</button>
+        <button type="button" onclick="previmg()">Previous Image</button>
+        <button type="button" onclick="nextimg()">Next Image</button>
+    </section>
+    <script>
+        var i = 0; //counter at start point
+        var images = [] //array for images
+        var time = 1000; //image change delay time (in miliseconds)
+
+        //Image list:
+        images[0] = 'img1.jpg';
+        images[1] = 'img2.jpeg';
+        images[2] = 'img3.avif';
+        images[3] = 'img4.jpg';
+        images[4] = 'img5.webp';
+        images[5] = 'img6.jpg';
+        images[6] = 'img7.jpg';
+        images[7] = 'img8.jpg';
+        images[8] = 'img9.png';
+        images[9] = 'img10.jpg';
+
+        // Change image Func:
+        function changeImg(){
+            var man_radio = document.getElementById('manual');
+            if(man_radio.checked){
+                return 0;
+            }
+            else{
+                document.slide.src = images[i];
+                if(i < images.length - 1){
+                    i++;
+                }
+                else{
+                    i = 0;
+                }
+                setTimeout("changeImg()", time);
+            }
+        }
+
+        //Previous image:
+        function previmg(){
+            if(i == 0){
+                i = 9;
+            }
+            else{
+                i--;
+            }
+            document.slide.src = images[i];
+        }
+
+        //Next image:
+        function nextimg(){
+            if(i == 9){
+                i = 0;
+            }
+            else{
+                i++;
+            }
+            document.slide.src = images[i];
+        }
+
+        window.onload = changeImg;
+    </script>
+    <div class="img_box">
+        <img name="slide" height="500">
+    </div>
+</body>
+</html>
